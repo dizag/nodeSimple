@@ -66,11 +66,11 @@ exports.updateById = function(req, res) {
 		// update data
 		users[identity] = updatedUser;
 
-		console.log("--->Update Successfully, users: \n" + JSON.stringify(users, null, 4))
+		console.log("Update Successfully, users: \n" + JSON.stringify(users, null, 4))
 		
 		res.end("Update Successfully! \n" + JSON.stringify(updatedUser, null, 4));
 	}else{
-		res.end("Don't Exist Customer:\n:" + JSON.stringify(updatedUser, null, 4));
+		res.end("Don't Exist User:\n:" + JSON.stringify(updatedUser, null, 4));
 	}
 };
 
@@ -80,6 +80,6 @@ exports.deleteById = function(req, res) {
 	const deleteUser = users[identity];
     delete users[identity];
 
-    console.log("--->After deletion, user list:\n" + JSON.stringify(users, null, 4) );
+    console.log("After deletion, user list:\n" + JSON.stringify(users, null, 4) );
     res.end( "Deleted user: \n" + JSON.stringify(deleteUser, null, 4));
 };

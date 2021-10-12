@@ -9,9 +9,9 @@
 
 
 ## for install in project directory
-### `npm install express body-parser`
+### `npm i express body-parser`
 ### `npm i -D cross-env`
-### `npm install jest supertest`
+### `npm i jest supertest`
 
 ## Available Scripts
 ### running server

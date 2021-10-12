@@ -1,0 +1,11 @@
+POST http://localhost:8081/api/users
+Content-Type: application/json
+
+{
+ "firstname": "Zdravko",
+ "lastname": "Totinov",
+  "age": 45,
+  "id": 7
+}
+
+###

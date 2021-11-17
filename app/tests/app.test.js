@@ -4,18 +4,18 @@ const app = require('../../server')
 
 describe('Post Endpoints', () => {
 
-	const testUser = {
+	const testEntity = {
 		id: 5,
 		email: 'zzz@5.com',
-		givenName: 'userName_5',
+		givenName: 'entityName_5',
 		familyName: 'familyName_5',
 	}
 
-	it('should create a new user', async () => {
+	it('should create a new entity', async () => {
 
 		const res = await request(app)
-			.post('/api/users')
-			.send(testUser)
+			.post('/api/entities')
+			.send(testEntity)
 
 		expect(res.statusCode).toEqual(200);
 
@@ -23,23 +23,23 @@ describe('Post Endpoints', () => {
 
 		expect(response.status).toEqual('ok');
 		expect(response.msg).toEqual('Post Successfully');
-		expect(response.newUser.email).toEqual(testUser.email);
-		expect(response.newUser.givenName).toEqual(testUser.givenName);
-		expect(response.newUser.familyName).toEqual(testUser.familyName);
+		expect(response.newEntity.email).toEqual(testEntity.email);
+		expect(response.newEntity.givenName).toEqual(testEntity.givenName);
+		expect(response.newEntity.familyName).toEqual(testEntity.familyName);
 
 	})
 
-	it('should get user Id : 4', async () => {
+	it('should get entity Id : 4', async () => {
 
 		const res = await request(app)
-			.get('/api/users/4')
+			.get('/api/entities/4')
 
 		console.log(JSON.stringify(res.body));
 		expect(res.statusCode).toEqual(200);
-		expect(res.text).toEqual("Get a user:\n" + JSON.stringify({
+		expect(res.text).toEqual("Get a entity:\n" + JSON.stringify({
 			id: 4,
 			email: 'zzz@4.com',
-			givenName: 'userName_4',
+			givenName: 'entityName_4',
 			familyName: 'familyName_4',
 			created: '2021-10-12T10:18:52.651Z'
 		}, null, 4));

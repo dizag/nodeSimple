@@ -47,20 +47,20 @@ let entities = {
 
 exports.create = function(req, res) {
 
-	let newEntity = req.body;
+	let data = req.body;
 
 	let uuid = createUUID();
 
-	newEntity.uuid = uuid;
-	newEntity.created = new Date();
-	newEntity.id = Math.max.apply(Math, Object.values(entities).map(function(entity) { return entity.id; })) + 1;
-	newEntity.userId = 1;
+	data.uuid = uuid;
+	data.created = new Date();
+	data.id = Math.max.apply(Math, Object.values(entities).map(function(entity) { return entity.id; })) + 1;
+	data.userId = 1;
 
 
-	entities[uuid] = newEntity;
+	entities[uuid] = data;
 
 	console.log("After Post, list of Entities:\n" + JSON.stringify(entities, null, 4));
-    res.end(JSON.stringify({status: 'ok', msg: 'Post Successfully', newEntity}, null, 4));
+    res.end(JSON.stringify({status: 'ok', msg: 'Post Successfully', data}, null, 4));
 };
 
 exports.getAll = function(req, res) {
@@ -71,34 +71,36 @@ exports.getAll = function(req, res) {
 
 exports.getByUUID = function(req, res) {
 
-	const entity = entities[req.params.uuid];
+	const data = entities[req.params.uuid];
 
-    console.log("Get entity: \n" + JSON.stringify(entity, null, 4));
-    res.end( "Get a entity:\n" + JSON.stringify(entity, null, 4));
+    console.log("Get entity: \n" + JSON.stringify(data, null, 4));
+	res.end(JSON.stringify({status: 'ok', msg: 'Get a entity Successfully!', data}, null, 4));
 };
 
 exports.updateByUUID = function(req, res) {
 
 	const uuid = req.params.uuid;
-	const updatedEntity = req.body;
+	const data = req.body;
 
 	if(entities[uuid] != null){
 
 		// update data
-		entities[uuid] = updatedEntity;		
-		res.end("Update Successfully! \n" + JSON.stringify(updatedEntity, null, 4));
+		entities[uuid] = data;		
+		res.end(JSON.stringify({status: 'ok', msg: 'Update Successfully!', data}, null, 4));
+
 	}else{
-		res.end("Don't Exist Entity:\n:" + JSON.stringify(updatedEntity, null, 4));
+		res.end("Don't Exist Entity:\n:" + JSON.stringify(data, null, 4));
 	}
 };
 
 exports.deleteByUUID = function(req, res) {
 
-	const deleteEntity = entities[req.params.uuid];
+	const data = entities[req.params.uuid];
     delete entities[req.params.uuid];
 
     console.log("After deletion, entity list:\n" + JSON.stringify(entities, null, 4) );
-    res.end( "Deleted entity: \n" + JSON.stringify(deleteEntity, null, 4));
+	res.end(JSON.stringify({status: 'ok', msg: 'Deleted entity Successfully!', data}, null, 4));
+
 };
 
 const createUUID = () =>  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

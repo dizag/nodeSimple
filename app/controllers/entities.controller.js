@@ -79,26 +79,13 @@ exports.getByUUID = function(req, res) {
 
 exports.updateByUUID = function(req, res) {
 
-	console.log('----------updateByUUID-----------------');
-	console.log('req.params : ', req.params);
-	console.log('++++++++++++++++');
-	console.log('req.body : ', req.body);
-	console.log('---------------------------');
-
 	const uuid = req.params.uuid;
 	const updatedEntity = req.body;
 
 	if(entities[uuid] != null){
 
 		// update data
-		console.log('---------before update data------------------');
-		console.log(`entities[${uuid}]: `, entities[uuid]);
-		entities[uuid] = updatedEntity;
-		console.log('---------after update data------------------');
-		console.log(`entities[${uuid}]: `, entities[uuid]);
-
-		console.log("Update Successfully, entities: \n" + JSON.stringify(entities, null, 4))
-		
+		entities[uuid] = updatedEntity;		
 		res.end("Update Successfully! \n" + JSON.stringify(updatedEntity, null, 4));
 	}else{
 		res.end("Don't Exist Entity:\n:" + JSON.stringify(updatedEntity, null, 4));
